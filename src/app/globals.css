@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button,
+div {
+  transition: all 0.2s;
+}
+
+.loading {
+  animation: slide 5s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(500px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
+
+.alert,
+.alert * {
+  animation: flash 1s linear infinite;
+}
+
+@keyframes flash {
+  0% {
+    color: white;
+  }
+
+  25% {
+    color: red;
+  }
+
+  50% {
+    color: black;
+  }
+
+  75% {
+    color: red;
+  }
+
+  100% {
+    color: white;
+  }
+}

@@ -1,20 +1,57 @@
 "use server";
 
-import { mc } from "@/mol";
+import { KEY } from "@/global";
 import { Material } from "@/types";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
-export const formulaAct = (fd: FormData) => {
-  const material = String(fd.get("material"));
-  const sub = String(fd.get("sub"));
+export const createFormula = async (fd: FormData) => {
+  const atomName = fd.get("atomName")!.toString();
+  const valence = fd.get("valence")!.toString();
+  const cookiesList = cookies();
 
-  const List: Material[] = [{ atomName: material, valence: parseInt(sub) }];
-  mc.molecular(List);
+  if (fd.get("allDelete")) {
+    cookiesList.delete(KEY);
+    revalidatePath("/");
+    return "deleted-all";
+  }
 
-  // fetch("http://localhost:3000/api/calc", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({ material }),
-  // });
+  if (atomName === "") return false;
+
+  try {
+    const prev = cookiesList.get(KEY);
+    if (fd.get("backDelete")) {
+      const prevList: Material[] = JSON.parse(prev!.value);
+      prevList.pop();
+      cookiesList.set(KEY, JSON.stringify(prevList));
+      return true;
+    }
+
+    let newMaterials: Material[] = [
+      { atomName, valence: valence === "" ? 1 : Number(valence) },
+    ];
+
+    if (prev) newMaterials = [...JSON.parse(prev.value), ...newMaterials];
+    cookiesList.set(KEY, JSON.stringify(newMaterials), { secure: true });
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+
+  console.log("action done");
+
+  revalidatePath("/");
+  return true;
+};
+
+export const formulaReducer = async (prev?: Material[], fd?: FormData) => {
+  if (fd) {
+    const validate = await createFormula(fd);
+    return !validate
+      ? prev
+      : validate === "deleted-all"
+      ? []
+      : (JSON.parse(cookies().get(KEY)!.value) as Material[]);
+  }
+  return prev;
 };

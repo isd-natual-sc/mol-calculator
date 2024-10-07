@@ -1,9 +1,14 @@
-import Link from "next/link";
+import Manual from "@/components/common/Manual";
 
 export default function Home() {
   return (
-    <main>
-      <Link href={"/molecule"}>式量</Link>
-    </main>
+    <div>
+      <Manual />
+
+      <div>
+        <h1>伊志田高校の自然科学部について</h1>
+        <div>骨格標本などを作っています。</div>
+      </div>
+    </div>
   );
 }

@@ -1,8 +1,5 @@
-export interface Props {
-  name: string;
-  label: string;
-  placeholder: string;
-  width: number;
+interface Props {
+  type: string;
 }
 
 type Material = {
@@ -10,32 +7,41 @@ type Material = {
   valence: number;
 };
 
-type Atomics = {
-  [key: string]: number;
+type HashMap<T> = {
+  [key: string]: T;
 };
 
-type InputMaterial = {
-  id: string;
-  atomName: string;
-  valence: number;
+type ValidationStatus = {
+  status: string;
 };
 
-type ByMass = {
+type Ways = {
   mol: number;
+  mass: number;
   piece: number;
   volume: number;
 };
 
-type ByPiece = {
-  mol: number;
-  mass: number;
-  volume: number;
-};
+type WaysOption = {
+  mol?: number;
+  mass?: number;
+  piece?: number;
+  volume?: number;
+} & ValidationStatus;
 
-type ByVolume = {
-  mol: number;
-  mass: number;
-  piece: number;
-};
+type ByMol = Pick<Ways, "mass" | "piece" | "volume"> & ValidationStatus;
+type ByMass = Pick<Ways, "mol" | "piece" | "volume"> & ValidationStatus;
+type ByPiece = Pick<Ways, "mass" | "mol" | "volume"> & ValidationStatus;
+type ByVolume = Pick<Ways, "mass" | "mol" | "piece"> & ValidationStatus;
 
-export type { Material, Atomics, InputMaterial, ByMass, ByPiece, ByVolume };
+export type {
+  Props,
+  Material,
+  HashMap,
+  ValidationStatus,
+  WaysOption,
+  ByMol,
+  ByMass,
+  ByPiece,
+  ByVolume,
+};
