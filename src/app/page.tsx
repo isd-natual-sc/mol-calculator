@@ -1,14 +1,13 @@
+import Introduce from "@/components/common/Introduce";
 import Manual from "@/components/common/Manual";
+import ClientCmn from "@/components/csr/ClientRoot";
 
 export default function Home() {
   return (
     <div>
       <Manual />
-
-      <div>
-        <h1>伊志田高校の自然科学部について</h1>
-        <div>骨格標本などを作っています。</div>
-      </div>
+      <Introduce />
+      {/* <ClientCmn /> */}
     </div>
   );
 }

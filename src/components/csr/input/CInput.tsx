@@ -1,5 +1,5 @@
 "use client";
-import { Material } from "@/types";
+import { Material } from "@/utils/types";
 import { useEffect, useRef } from "react";
 
 const CInput = ({

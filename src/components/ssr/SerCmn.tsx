@@ -1,12 +1,12 @@
-import { Material, Props } from "@/types";
+import { Material, Props } from "@/utils/types";
 import MaterialList from "../common/MaterialList";
-import { mc } from "@/mol";
+import { mc } from "@/utils/mol";
 import { cookies } from "next/headers";
-import { KEY } from "@/global";
+import { KEY } from "@/utils/global";
 import { createFormula } from "@/actions/formula";
-import CInput from "../csr/CInput";
-import AtomInput from "../csr/AtomInput";
-import CalcBody from "./CalcBody";
+import CInput from "../csr/input/CInput";
+import AtomInput from "../csr/input/AtomInput";
+import CalcBody from "./calc/CalcBody";
 
 export async function getServerSideProps() {}
 
@@ -39,21 +39,23 @@ export default function SerCmn({ type }: Props) {
         <div className='w-full flex justify-center items-center p-1'>
           <button
             className='text-lg shadow bg-sky-100 rounded-md active:bg-black active:text-white px-5 py-2 m-2 hover:font-semibold'
-            type={"submit"}>
+            type='submit'>
             追加
           </button>
 
           <button
             className='text-lg shadow bg-red-100 rounded-md active:bg-black active:text-white px-5 py-2 m-2 hover:font-semibold'
-            type={"submit"}
-            name='backDelete'>
+            value='backDelete'
+            name='backDelete'
+            type='submit'>
             最後尾を削除
           </button>
+
           <button
             className='text-lg shadow bg-red-600 rounded-md active:bg-black text-white px-5 py-2 m-2 hover:font-semibold'
-            type={"submit"}
-            value={"allDelete"}
-            name='allDelete'>
+            value='allDelete'
+            name='allDelete'
+            type='submit'>
             すべて削除
           </button>
         </div>

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { TITLE } from "@/global";
+import { TITLE } from "@/utils/global";
 import Header from "@/components/common/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: TITLE,
+  icons: "n-electro-icon.svg",
   description: "物質量が絡む化学の計算を自動化するアプリケーション。",
   formatDetection: { telephone: false },
   openGraph: {

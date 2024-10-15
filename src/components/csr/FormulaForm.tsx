@@ -1,16 +1,16 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import { Material, Props } from "@/types";
-import MaterialList from "../common/MaterialList";
-import AtomInput from "./AtomInput";
-import { mc } from "@/mol";
-import CalcClient from "./CalcClient";
+import { atoms } from "@/utils/atoms";
+import { Material } from "@/utils/types";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
-export default function ClientCmn({ type }: Props) {
+type FormulaProps = {
+  materials: Material[];
+  setMaterials: Dispatch<SetStateAction<Material[]>>;
+};
+
+const FormulaForm = ({ materials, setMaterials }: FormulaProps) => {
   const [error, setError] = useState("");
-  const [materials, setMaterials] = useState<Material[]>([]);
-  const [valence, setValence] = useState(1);
 
+  const [valence, setValence] = useState(1);
   const [atomName, setAtomName] = useState("");
 
   const focusRef = useRef<HTMLInputElement>(null);
@@ -37,6 +37,11 @@ export default function ClientCmn({ type }: Props) {
   }, [materials]);
 
   const createFormula = () => {
+    if (!Object.keys(atoms).includes(atomName)) {
+      setError("値が間違っています！");
+      return;
+    }
+
     setError("");
 
     setMaterials([
@@ -86,19 +91,15 @@ export default function ClientCmn({ type }: Props) {
             物質名を元素記号で入力
           </label>
 
-          <>
-            <input
-              className='text-xl bg-slate-100 p-2 m-2 shadow max-w-20 text-center'
-              type='text'
-              id='atom'
-              name='atomName'
-              value={atomName}
-              onChange={(e) => formatChemicalFormula(e.target.value)}
-              ref={focusRef}
-            />
-
-            {error || <div className='text-red-600 text-lg'>{error}</div>}
-          </>
+          <input
+            className='text-xl bg-slate-100 p-2 m-2 shadow max-w-20 text-center'
+            type='text'
+            id='atom'
+            name='atomName'
+            value={atomName}
+            onChange={(e) => formatChemicalFormula(e.target.value)}
+            ref={focusRef}
+          />
         </div>
 
         <div className='p-2 m-2 flex flex-col justify-center items-center'>
@@ -143,15 +144,8 @@ export default function ClientCmn({ type }: Props) {
           すべて削除
         </button>
       </div>
-      <ul className='flex justify-center items-center p-3'>
-        <MaterialList materials={materials} />
-      </ul>
-
-      <h2 className='w-full text-2xl text-center'>
-        式量：{mc.molecular(materials)}
-      </h2>
-
-      <CalcClient type={type} materials={materials} />
     </div>
   );
-}
+};
+
+export default FormulaForm;
