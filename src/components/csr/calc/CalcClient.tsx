@@ -15,7 +15,7 @@ const CalcClient = (props: CalcClientProps) => {
   switch (type) {
     case "root":
       return (
-        <div className='flex flex-col justify-center items-center'>
+        <div className="flex flex-col justify-center items-center">
           <Manual />
           <Introduce />
         </div>
@@ -35,7 +35,7 @@ const CalcClient = (props: CalcClientProps) => {
 
     default:
       return (
-        <h2 className='text-center text-xl m-2 p-3 font-medium'>
+        <h2 className="text-center text-xl m-2 p-3 font-medium">
           404 Not Found
         </h2>
       );

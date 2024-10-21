@@ -7,6 +7,8 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export const createFormula = async (fd: FormData) => {
+  // const begin = new Date().getUTCMilliseconds();
+
   const atomName = fd.get("atomName")?.toString();
   const valence = fd.get("valence")?.toString();
   const cookiesList = cookies();
@@ -16,6 +18,10 @@ export const createFormula = async (fd: FormData) => {
     cookiesList.delete(KEY);
     revalidatePath("/");
     console.log("All Delete done");
+
+    // const end = new Date().getUTCMilliseconds();
+    // console.log(end - begin);
+
     return "deleted-all";
   }
 
@@ -28,6 +34,10 @@ export const createFormula = async (fd: FormData) => {
 
     revalidatePath("/");
     console.log("Back Delete done");
+
+    // const end = new Date().getUTCMilliseconds();
+    // console.log(end - begin);
+
     return true;
   }
 
@@ -53,6 +63,10 @@ export const createFormula = async (fd: FormData) => {
   console.log("action done");
 
   revalidatePath("/");
+
+  // const end = new Date().getUTCMilliseconds();
+  // console.log(end - begin);
+
   return true;
 };
 

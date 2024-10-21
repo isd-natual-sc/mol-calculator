@@ -43,3 +43,34 @@ export const roundFloat = (value: number) =>
     : Math.round(value * 10 ** VALID_DIGITS) / 10 ** VALID_DIGITS;
 
 export const ALLOW_STEP = 10 ** -32;
+
+// 化学式が多すぎると0molになるので、有効数字にする
+export const roundFmt = (valid: number) => {
+  const validStr = String(valid);
+  const validCheck = validStr.split(".")[0];
+
+  // 0.000122とかのとき
+  if (validCheck === "0") {
+    const notZeroBgn = [...validStr].findIndex((char) => char !== "0");
+    const zeroLen = [...validStr].filter(
+      (char, i) => char === "0" && i < notZeroBgn
+    ).length;
+
+    return {
+      valid: valid * 10 ** zeroLen,
+      pow: zeroLen,
+    };
+  }
+
+  if (validCheck.length === 1) {
+    return {
+      valid,
+      pow: 1,
+    };
+  }
+
+  return {
+    valid: valid / 10 ** (validCheck.length - 1),
+    pow: validCheck.length - 1,
+  };
+};

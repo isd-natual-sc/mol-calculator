@@ -2,10 +2,18 @@
 
 ## Why I created
 
-The calculating such as **mol, mass, piece and volume** is basement in chemical.
-Last year, I created the first type, but I didn't consider performance.
+The calculating such as **mol, mass, piece and volume** is basics in chemical.
+Last year, I created the first type, but I didn't consider the performance.
 
 ## For Developer
+
+### Library Tutorial
+
+[React](https://ja.react.dev/learn)
+[React CDN](https://qiita.com/JustifyBaby/items/cedb7d904c409ef17829)
+[React YouTube](https://www.youtube.com/watch?v=nRCNL9T3J98)
+
+[Next.js](https://qiita.com/takubii/items/c33d5dbadbcae8f017e3)
 
 ### Library
 
