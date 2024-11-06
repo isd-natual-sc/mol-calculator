@@ -1,4 +1,4 @@
-# <div style="display: flex; justify-content: center; align-items: center;"><img src="./public/n-electro-icon.svg" width="28" style="border: 1px solid black; padding: 3px; margin: 12px; border-radius: 8px" />Chemical Calculator</div>
+# <div style="display: flex; justify-content: center; align-items: center;"><img src="./public/icon.svg" width="28" style="border: 1px solid black; padding: 3px; margin: 12px; border-radius: 8px" />Chemical Calculator</div>
 
 ## Why I created
 
