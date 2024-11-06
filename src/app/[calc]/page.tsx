@@ -1,5 +1,12 @@
 import SerCmn from "@/components/ssr/SerCmn";
-   
+import { Suspense } from "react";
+
+export const generateStaticParams = () => [
+  // 必要に応じて他のパラメータを追加
+  { calc: "addition" },
+  { calc: "subtraction" },
+];
+
 const CalcMain = ({ params }: { params: { calc: string } }) => {
   // const cookieData = cookies().get(KEY);
   // let materials = [];
@@ -9,8 +16,9 @@ const CalcMain = ({ params }: { params: { calc: string } }) => {
 
   return (
     <main>
-      <SerCmn type={params.calc} />
-      {/* <ActCmn type={params.calc}>
+      <Suspense fallback={<div className="text-2xl">〇～</div>}>
+        <SerCmn type={params.calc} />
+        {/* <ActCmn type={params.calc}>
         <div className='flex justify-center items-center p-2'>
           <MaterialList materials={materials} />
         </div>
@@ -19,6 +27,7 @@ const CalcMain = ({ params }: { params: { calc: string } }) => {
           式量：{roundFloat(mc.molecular(materials))}
         </h2>
       </ActCmn> */}
+      </Suspense>
     </main>
   );
 };
