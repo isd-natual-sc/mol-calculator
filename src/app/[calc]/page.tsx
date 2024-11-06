@@ -3,8 +3,8 @@ import { Suspense } from "react";
 
 export const generateStaticParams = () => [
   // 必要に応じて他のパラメータを追加
-  { calc: "addition" },
-  { calc: "subtraction" },
+  { calc: "/" },
+  { calc: "/" },
 ];
 
 const CalcMain = ({ params }: { params: { calc: string } }) => {
@@ -16,7 +16,7 @@ const CalcMain = ({ params }: { params: { calc: string } }) => {
 
   return (
     <main>
-      <Suspense fallback={<div className="text-2xl">〇～</div>}>
+      <Suspense fallback={<div className="text-2xl font-extrabold">〇～</div>}>
         <SerCmn type={params.calc} />
         {/* <ActCmn type={params.calc}>
         <div className='flex justify-center items-center p-2'>
