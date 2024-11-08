@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { TITLE } from "@/utils/global";
 import Header from "@/components/common/Header";
+import Reporter from "@/components/common/Reporter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
+        {/* <Reporter /> */}
         <Header />
         <noscript className="flex flex-col justify-center items-center">
           <div className="loading">読み込んでいます...</div>
