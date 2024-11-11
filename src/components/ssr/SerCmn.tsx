@@ -66,7 +66,11 @@ export default function SerCmn({ type }: Props) {
       </form>
 
       <ul className="flex justify-center items-center p-3">
-        {materials[0] ? <MaterialList materials={materials} /> : <></>}
+        {materials[0] ? (
+          <MaterialList materials={materials} />
+        ) : (
+          <div className="p-2 m-2 text-xl">ここに化学式が表示されます</div>
+        )}
       </ul>
 
       <h2 className="w-full text-2xl text-center">

@@ -2,6 +2,8 @@ interface Props {
   type: string;
 }
 
+type Path = { calc: string };
+
 type Material = {
   atomName: string;
   valence: number;
@@ -36,6 +38,7 @@ type ByVolume = Pick<Ways, "mass" | "mol" | "piece"> & ValidationStatus;
 
 export type {
   Props,
+  Path,
   Material,
   HashMap,
   ValidationStatus,

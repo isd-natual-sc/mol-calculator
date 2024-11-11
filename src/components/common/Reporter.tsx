@@ -1,12 +1,6 @@
 "use client";
 
-import { onFCP, onLCP, LCPMetric, FCPMetric } from "web-vitals";
-
-// interface Metric {
-//   lcp?: LCPMetric;
-//   fcp?: FCPMetric;
-//   label?: string;
-// }
+import { onFCP, onLCP } from "web-vitals";
 
 const Reporter = ({ label }: { label?: string }) => {
   label ??= "normal";

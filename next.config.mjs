@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: "/mol-calculator",
-  output: "export",
+  output: "standalone",
   experimental: {
     serverActions: {
-      allowedOrigins: ["https://isd-natual-sc.github.io"],
+      allowedOrigins: [
+        "https://isd-natual-sc.github.io",
+        "http://localhost:3000",
+      ],
     },
   },
 };
