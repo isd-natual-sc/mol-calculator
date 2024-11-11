@@ -1,16 +1,28 @@
 "use client";
 
-import { onLCP } from "web-vitals";
+import { onFCP, onLCP, LCPMetric, FCPMetric } from "web-vitals";
+
+interface Metric {
+  lcp?: LCPMetric;
+  fcp?: FCPMetric;
+  label?: string;
+}
 
 const Reporter = ({ label }: { label?: string }) => {
-  onLCP(async (metric) => {
-    label ??= "normal";
+  label ??= "normal";
+
+  onLCP(async (lcp) => {
+    let value = lcp.value;
+    onFCP(async (fcp) => {
+      value += fcp.value;
+    });
+
     await fetch("http://localhost:3000/mol-calculator/api/vitals", {
       headers: {
         "Content-Type": "application/json",
       },
       method: "post",
-      body: JSON.stringify({ metric, label }),
+      body: JSON.stringify({ value, label }),
     });
   });
 

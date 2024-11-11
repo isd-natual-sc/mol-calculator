@@ -63,26 +63,6 @@ const FormulaForm = ({ materials, setMaterials }: FormulaProps) => {
     setMaterials([]);
   };
 
-  if (window)
-    window.addEventListener("keydown", ({ key, ctrlKey }) => {
-      switch (key) {
-        case "Enter":
-          createFormula();
-          return;
-
-        case "Backspace":
-          if (ctrlKey) removeBack();
-          return;
-
-        case "Delete":
-          if (ctrlKey) removeAll();
-          return;
-
-        default:
-          return;
-      }
-    });
-
   return (
     <div>
       <form className='flex justify-center items-center'>
