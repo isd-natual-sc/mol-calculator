@@ -2,11 +2,11 @@
 
 import { onFCP, onLCP, LCPMetric, FCPMetric } from "web-vitals";
 
-interface Metric {
-  lcp?: LCPMetric;
-  fcp?: FCPMetric;
-  label?: string;
-}
+// interface Metric {
+//   lcp?: LCPMetric;
+//   fcp?: FCPMetric;
+//   label?: string;
+// }
 
 const Reporter = ({ label }: { label?: string }) => {
   label ??= "normal";
@@ -17,7 +17,7 @@ const Reporter = ({ label }: { label?: string }) => {
       value += fcp.value;
     });
 
-    await fetch("http://localhost:3000/mol-calculator/api/vitals", {
+    await fetch(String(process.env.NEXT_PUBLIC_VITAL_API_URL), {
       headers: {
         "Content-Type": "application/json",
       },
