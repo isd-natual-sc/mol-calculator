@@ -1,23 +1,39 @@
 "use client";
 
-import { onFCP, onLCP } from "web-vitals";
+import { onFCP, onLCP, onINP } from "web-vitals";
+
+type Metric = {
+  name: "FCP" | "LCP" | "INP" | "TTFB";
+  value: number;
+  label: string;
+  navType: string;
+  browserName: string;
+};
 
 const Reporter = ({ label }: { label?: string }) => {
   label ??= "normal";
+  const url = String(process.env.NEXT_PUBLIC_VITAL_API_URL);
+  console.log(url);
 
   onLCP(async (lcp) => {
-    let value = lcp.value;
-    onFCP(async (fcp) => {
-      value += fcp.value;
-    });
+    let body: Metric = {
+      name: "LCP",
+      value: lcp.value,
+      label,
+      navType: lcp.navigationType,
+      browserName: window.navigator.userAgent,
+    };
 
-    await fetch(String(process.env.NEXT_PUBLIC_VITAL_API_URL), {
+    await fetch(url, {
       headers: {
         "Content-Type": "application/json",
       },
       method: "post",
-      body: JSON.stringify({ value, label }),
-    });
+      mode: "no-cors",
+      body: JSON.stringify(body),
+    })
+      .then(() => console.log("Success"))
+      .catch((err) => console.log(err));
   });
 
   return <></>;

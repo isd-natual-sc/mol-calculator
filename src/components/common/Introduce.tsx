@@ -11,7 +11,7 @@ const Introduce = () => {
         href="https://www.instagram.com/nature._.science/profilecard/?igsh=bmgxd2dxbmE3MWJp"
         target={"_blank"}
         rel="noopener noreferrer"
-        className="text-xl"
+        className="text-xl text-blue-400 underline"
       >
         伊志田高校ー自然科学部 公式
       </Link>

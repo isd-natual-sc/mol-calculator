@@ -14,7 +14,7 @@ const Manual = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <video src="mol-calculator/explain1.mp4" height={200} ref={ref}></video>
+      <video src="explain1.mp4" height={200} ref={ref}></video>
 
       {isRepro ? (
         <button
